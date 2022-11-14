@@ -9,4 +9,5 @@ public class ScenarioForm {
     static By START_DATE = By.id("newScenarioTargetDate");
     static By END_DATE = By.id("newScenarioEndDate");
     static By CREATE_BUTTON = By.id("newScenarioCreate");
+    public static By CLOSE_SCENARIO = By.cssSelector("ul.icon-menu i.fa-remove");
 }

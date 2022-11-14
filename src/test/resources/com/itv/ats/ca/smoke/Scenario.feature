@@ -6,4 +6,6 @@ Feature: Manage scenarios
 #    And adds a test programme if it isn't there
 #    And adds a break
 #    And sets some ratings
-#    Then the new scenario is listed on the scenarios page
+    Then the new scenario is listed on the scenarios page
+
+  Scenario: Create new scenario
