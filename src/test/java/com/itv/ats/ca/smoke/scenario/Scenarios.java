@@ -2,16 +2,18 @@ package com.itv.ats.ca.smoke.scenario;
 
 
 import net.serenitybdd.screenplay.Question;
-import org.openqa.selenium.By;
+import net.serenitybdd.screenplay.questions.Text;
+import net.serenitybdd.screenplay.questions.TextContent;
+import net.thucydides.core.annotations.Title;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Scenarios {
 
-    public static By list = By.cssSelector(".scenario-list div.scenario-list__item");
 
-//    public static Question<List<String>> names() {
-//            return actor -> TextContent.of(SearchResultList.RESULT_TITLES).viewedBy(actor).asList();
-//        }
-//    }
+    public static Question<Collection<String>> names() {
+        return actor -> actor.asksFor(Text.ofEach(ScenarioList.NAMES));
+    }
+
 }

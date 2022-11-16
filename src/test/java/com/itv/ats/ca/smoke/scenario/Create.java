@@ -5,39 +5,41 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.*;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Month;
 
-public class CreateTestScenario {
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
+
+public class Create {
 
     private String name;
     private String station;
     private String date;
 
-    public static CreateTestScenario defineATestScenarioNamed(String name) {
-        CreateTestScenario scenarioCreation = new CreateTestScenario();
+    public static Create scenario(String name) {
+        Create scenarioCreation = new Create();
         scenarioCreation.name = name;
         return scenarioCreation;
     }
 
-    public CreateTestScenario forStation(String station) {
+    public Create forStation(String station) {
         this.station = station;
         return this;
     }
 
-    public CreateTestScenario on(String date) {
+    public Performable dated(String date) {
         this.date = date;
-        return this;
+        return create();
     }
 
-    public Performable andCreateIt() {
+    private Performable create() {
         return Task.where("{0} creates a scenario for " + station + " on " + date,
-                WaitUntil.angularRequestsHaveFinished(),
-                Enter.theValue(name).into(ScenarioForm.SCENARIO_NAME_FIELD),
-                SelectFromOptions.byVisibleText(station).from(ScenarioForm.STATION_SELECTION),
-                Click.on(ScenarioForm.START_DATE),
+                Enter.theValue(name).into(CreateScenarioForm.SCENARIO_NAME_FIELD),
+                SelectFromOptions.byVisibleText(station).from(CreateScenarioForm.STATION_SELECTION),
+                Click.on(CreateScenarioForm.START_DATE),
                 ChooseDate.of(LocalDate.of(2025, Month.DECEMBER, 31))
-                        .then(Click.on(ScenarioForm.CREATE_BUTTON))
+                        .then(Click.on(CreateScenarioForm.CREATE_BUTTON))
         );
     }
 }

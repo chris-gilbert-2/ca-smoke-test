@@ -2,23 +2,23 @@ package com.itv.ats.ca.smoke.stepdefinitions;
 
 import com.itv.ats.ca.smoke.login.Login;
 import com.itv.ats.ca.smoke.navigation.Close;
-import com.itv.ats.ca.smoke.navigation.LeftNavigation;
 import com.itv.ats.ca.smoke.navigation.NavigateTo;
-import com.itv.ats.ca.smoke.scenario.ScenarioForm;
+import com.itv.ats.ca.smoke.scenario.Create;
+import com.itv.ats.ca.smoke.scenario.ScenarioList;
 import com.itv.ats.ca.smoke.scenario.Scenarios;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.screenplay.GivenWhenThen;
-import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
+import net.serenitybdd.screenplay.ensure.Ensure;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static com.itv.ats.ca.smoke.scenario.CreateTestScenario.defineATestScenarioNamed;
+import static org.hamcrest.Matchers.*;
 
 public class ScenarioStepDefinitions {
 
@@ -38,16 +38,21 @@ public class ScenarioStepDefinitions {
     public void createTestScenario(String station, String scenarioDate) {
         theActorInTheSpotlight()
                 .attemptsTo(
-                        NavigateTo.scenarios().then(
-                        defineATestScenarioNamed("smoke test").forStation(station).on(scenarioDate).andCreateIt()));
+                        NavigateTo.scenarios(),
+                        Create.scenario("smoke test")
+                                .forStation(station)
+                                .dated(scenarioDate),
+                        WaitUntil.angularRequestsHaveFinished(),
+                        Close.theScenarioView()
+                );
     }
 
     @Then("^the new scenario is listed on the scenarios page")
-    public void checkThatNewScenarioIsListed(String term) {
-        theActorInTheSpotlight().attemptsTo(Close.theScenarioView().then(NavigateTo.scenarios()));
+    public void checkThatNewScenarioIsListed() {
+        theActorInTheSpotlight().attemptsTo(NavigateTo.scenarios());
+        Scenarios.names().answeredBy(theActorInTheSpotlight()).contains("Smoke Test");
 //        theActorInTheSpotlight().should(
-//                seeThat("scenario list",
-//                        Scenarios.list));
+//                seeThat(Scenarios.names(), contains("Smoke Test")));
     }
 
 }
