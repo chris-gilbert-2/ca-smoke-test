@@ -1,10 +1,9 @@
 package com.itv.ats.ca.smoke.stepdefinitions;
 
 import com.itv.ats.ca.smoke.login.Login;
-import com.itv.ats.ca.smoke.navigation.Close;
+import com.itv.ats.ca.smoke.scenario.Close;
 import com.itv.ats.ca.smoke.navigation.NavigateTo;
 import com.itv.ats.ca.smoke.scenario.Create;
-import com.itv.ats.ca.smoke.scenario.ScenarioList;
 import com.itv.ats.ca.smoke.scenario.Scenarios;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -12,13 +11,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-import net.serenitybdd.screenplay.ensure.Ensure;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.hamcrest.Matchers.*;
 
 public class ScenarioStepDefinitions {
 

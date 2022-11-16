@@ -1,4 +1,4 @@
-package com.itv.ats.ca.smoke.navigation;
+package com.itv.ats.ca.smoke.scenario;
 
 import com.itv.ats.ca.smoke.scenario.CreateScenarioForm;
 import com.itv.ats.ca.smoke.scenario.FilterScenarioForm;
