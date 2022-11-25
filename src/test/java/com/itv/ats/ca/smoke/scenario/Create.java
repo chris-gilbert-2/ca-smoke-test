@@ -15,7 +15,7 @@ public class Create {
 
     private String name;
     private String station;
-    private String date;
+    private LocalDate date;
 
     public static Create scenario(String name) {
         Create scenarioCreation = new Create();
@@ -28,7 +28,7 @@ public class Create {
         return this;
     }
 
-    public Performable dated(String date) {
+    public Performable dated(LocalDate date) {
         this.date = date;
         return create();
     }
@@ -38,7 +38,7 @@ public class Create {
                 Enter.theValue(name).into(CreateScenarioForm.SCENARIO_NAME_FIELD),
                 SelectFromOptions.byVisibleText(station).from(CreateScenarioForm.STATION_SELECTION),
                 Click.on(CreateScenarioForm.START_DATE),
-                ChooseDate.of(LocalDate.of(2025, Month.DECEMBER, 31))
+                ChooseDate.of(date)
                         .then(Click.on(CreateScenarioForm.CREATE_BUTTON))
         );
     }
