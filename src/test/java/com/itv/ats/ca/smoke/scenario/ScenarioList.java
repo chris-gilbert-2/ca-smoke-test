@@ -12,4 +12,6 @@ public class ScenarioList {
     public static By DELETE(String scenarioName) {
         return By.cssSelector(String.format("div[title='%s'] button.fa-trash-o", scenarioName));
     }
+
+    public static By CONFIRM_DELETE = By.cssSelector("button.btn--danger");
 }

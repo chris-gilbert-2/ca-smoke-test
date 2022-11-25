@@ -2,14 +2,15 @@ package com.itv.ats.ca.smoke.scenario;
 
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.*;
-import net.serenitybdd.screenplay.waits.WaitUntil;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import org.apache.commons.lang3.StringUtils;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.Month;
 
-import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
+import static java.util.UUID.randomUUID;
+import static org.apache.commons.lang3.StringUtils.truncate;
 
 public class Create {
 
@@ -17,10 +18,22 @@ public class Create {
     private String station;
     private LocalDate date;
 
-    public static Create scenario(String name) {
+    public static Create scenario() {
         Create scenarioCreation = new Create();
-        scenarioCreation.name = name;
         return scenarioCreation;
+    }
+
+    public Create named(String name) {
+        return this.withARandomName(name);
+    }
+
+    public Create withARandomName(String prefix) {
+        this.name = truncate(prefix + " " + randomUUID(), 0, 20);
+        return this;
+    }
+
+    public Create withARandomName() {
+        return withARandomName("");
     }
 
     public Create forStation(String station) {

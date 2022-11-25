@@ -5,4 +5,6 @@ import org.openqa.selenium.By;
 public class FilterScenarioForm {
 
     public static By CLOSE_SCENARIO = By.id("cancelFilters");
+
+    public static By SCENARIO_NAME = By.id("scenarioName");
 }
